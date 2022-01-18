@@ -11,8 +11,25 @@ const unArreglo =  [
     {nombre: "sofy", apellido:"hdz", "ocupacion": "pastelera",escuela: "CETI"},
     {nombre: "alfredo", apellido:"pizana", "ocupacion": "maestro",escuela: "CETI"},
     {nombre: "lore", apellido:"hdz", ocupacion: "maestro",escuela: "EDU"},
+    {nombre: "vero", apellido:"hdz", ocupacion: "cocinero",escuela: "EDU"},
+    {nombre: "ramon", apellido:"pizana", ocupacion: "entrenado",escuela: "UDG"},
 ]
-
+/**
+ *  [
+ * "CETI":[
+ *   {nombre: "sofy", apellido:"hdz", "ocupacion": "pastelera",escuela: "CETI"},
+ *   {nombre: "alfredo", apellido:"pizana", "ocupacion": "maestro",escuela: "CETI"},
+ * ], 
+ * "EDU":[
+ *      {nombre: "lore", apellido:"hdz", ocupacion: "maestro",escuela: "EDU"},
+        {nombre: "vero", apellido:"hdz", ocupacion: "cocinero",escuela: "EDU"},
+ * ]
+ * "UDG":[
+ *          {nombre: "ramon", apellido:"pizana", ocupacion: "entrenado",escuela: "UDG"},
+ * ]
+]
+ * 
+ */
 function hola(){}
 
 const saludar = () => { }
@@ -43,3 +60,28 @@ let arregloConReduce = unArreglo.reduce(
         return previousValueOAccum
 },[])
 console.log(arregloConReduce)
+
+let escuelas = unArreglo.reduce((previous,current,index,original) => {
+    const { escuela } = current
+    //let escuelas = previous
+ /*if(escuelas[escuela] === undefined){
+    escuelas[escuela] = [current]
+
+    return escuelas
+ }
+ else {
+     let alumnos = [...escuelas[escuela],current]  // [  ...[{}],{}                   ]
+     escuelas[escuela] = alumnos
+     return escuelas
+ }*/
+     if(previous[escuela] === undefined)
+    previous[escuela] = []
+    previous[escuela] =  [...previous[escuela],current]
+    return previous
+}, {})
+
+console.log(escuelas)
+Object.keys(escuelas).map((escuela)=>{
+    
+    console.log(escuelas[escuela])
+})
